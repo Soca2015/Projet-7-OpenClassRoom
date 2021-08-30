@@ -43,7 +43,7 @@ Spécifications du dashboard
 
 ## Lien pour l'API
 
-https://pret-depenser.herokuap p.com/ 
+https://pret-depenser.herokuapp.com/ 
 
 ## Lien pour le Dashboard
 
