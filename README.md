@@ -47,7 +47,7 @@ https://pret-depenser.herokuapp.com/
 
 ## Lien pour le Dashboard
 
-Nous allons faire le test 
+https://share.streamlit.io/soca2015/dashboard/dashboard.py
 
 
 
