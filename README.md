@@ -42,6 +42,7 @@ Spécifications du dashboard
  https://www.kaggle.com/c/home-credit-default-risk/data
 
 ## Lien pour l'API
+Ceci est notre lien du déploiement de notre API, vous trouverez la table Identifiant qui contient tous les identifiants des clients, vous pouvez rentrer un identifiant de client pour regarder sa probabilité ainsi que son résultat.
 
 https://pret-depenser.herokuapp.com/ 
 
@@ -49,5 +50,6 @@ https://pret-depenser.herokuapp.com/
 
 https://share.streamlit.io/soca2015/dashboard/dashboard.py
 
-
+Ceci est le lien de notre dashboard qui contient le résultat de scoring d'un client ainsi que l'intréprétabilité du résultat de scoring.
+Il permet de visualiser l'ensemble des attributs d'un client et de tous les clients.
 
