@@ -2,18 +2,16 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
-from urllib.request import urlopen
+
 import lime
 from lime import lime_tabular
 import streamlit.components.v1 as components
 import plotly.figure_factory as ff
-import altair as alt
 import matplotlib.pyplot as plt
 import dill
 import plotly.graph_objects as go
 import plotly.express as px
-#https://lime-ml.readthedocs.io/en/latest/lime.html?highlight=explain_instance#lime.lime_tabular.LimeTabularExplainer.explain_instance
-# Load Dataframe
+
 df = pd.read_csv("Base_Client.csv",index_col=0)
 print(df.shape)
 
@@ -36,8 +34,12 @@ liste_id = df['SK_ID_CURR'].values
 #affichage formulaire
 st.title('Dashboard Scoring Credit')
 st.markdown("Prédictions de scoring client, notre seuil de choix est de 40 %")
-id_input = st.number_input(label='Veuillez saisir l\'identifiant d\'un client:',format="%i", value=0)
+hobby = st.selectbox(" Veuillez choisir un identifiant à saisir: ", liste_id)
+#select_box=st.sidebar.multiselect(label='Veuillez choisir un identifiant à saisir ',options=liste_id)
+#st.markdown("Essayez avec les identifiants clients suivants : 100001, 100005,100013, 100042, 100066, 100074, 10015, 100107")
+id_input = st.number_input(label='Veuillez saisir l\'identifiant du client demandeur de crédit:',format="%i", value=0)
 if id_input not in liste_id:
+
     st.write("L'identifiant client n'est pas bon")
 
 
@@ -45,7 +47,6 @@ elif (int(id_input) in liste_id):
     i = df['SK_ID_CURR']==id_input
     Y = df[i]
     Y = Y.drop(['SK_ID_CURR'], axis=1)
-
 
 
 #transformation des données
@@ -60,9 +61,11 @@ elif (int(id_input) in liste_id):
 # importer le modele et l'appliquer
     pr = model.predict_proba(num)[:, 1]
     if pr > 0.4:
+
         prevision= 'Rejet de la demande de crédit'
 
     else :
+
         prevision= 'Acceptation de la demande de crédit'
     #affichage prévision
     st.subheader('Le statut de la demande de crédit')
@@ -72,8 +75,7 @@ elif (int(id_input) in liste_id):
 
     #interprétabilité
     st.subheader('Interprétabilité de notre prévision')
-    exp = explainer.explain_instance(data_row=num.reshape(1,Y.shape[1])[0], \
-                                     predict_fn=model.predict_proba)
+    exp = explainer.explain_instance(data_row=num.reshape(1,Y.shape[1])[0],predict_fn=model.predict_proba)
 
     components.html(exp.as_html(), height=800)
     exp.as_list()
